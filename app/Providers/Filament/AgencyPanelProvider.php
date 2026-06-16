@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\AgencyDashboard;
+use App\Filament\Agency\Pages\AgencyDashboard;
 use App\Http\Middleware\RedirectToAppLogin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;

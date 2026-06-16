@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\Agency\Pages;
 
 use App\Filament\Agency\Widgets\AgencyOverviewStatsWidget;
 use App\Filament\Agency\Widgets\AgencyWelcomeWidget;
