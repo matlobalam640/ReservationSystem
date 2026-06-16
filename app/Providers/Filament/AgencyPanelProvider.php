@@ -31,6 +31,7 @@ class AgencyPanelProvider extends PanelProvider
             ->login(false)
             ->homeUrl('/agency')
             ->broadcasting(false)
+            ->sidebarCollapsibleOnDesktop(false)
             ->brandName('HERO Agency Portal')
             ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
             ->brandLogoHeight('2.5rem')
@@ -52,10 +53,14 @@ class AgencyPanelProvider extends PanelProvider
             ])
             ->authMiddleware([RedirectToAppLogin::class])
             ->renderHook(
+                PanelsRenderHook::HEAD_START,
+                fn (): string => '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />'
+                    .'<style id="hero-filament-fix">html.fi .fi-main-ctn,html.fi .fi-layout,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}html.fi .fi-main-ctn{display:flex!important;min-height:calc(100dvh - 4rem)!important}</style>',
+            )
+            ->renderHook(
                 PanelsRenderHook::HEAD_END,
                 fn (): string => '<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />'
-                    .'<link href="'.asset('css/hero-admin.css').'?v=6" rel="stylesheet" />'
-                    .'<style>.fi-panel-admin .fi-main-ctn,.fi-panel-agency .fi-main-ctn{opacity:1!important;display:flex!important;min-height:calc(100dvh - 4rem)!important}</style>',
+                    .'<link href="'.asset('css/hero-admin-live.css').'?v=7" rel="stylesheet" />',
             );
     }
 }
