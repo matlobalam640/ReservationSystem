@@ -12,6 +12,8 @@ use App\Models\FlightLeg;
 use App\Models\Invoice;
 use App\Models\MedevacCase;
 use App\Services\Operations\LoadCalculatorService;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Section;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -30,6 +32,19 @@ class OpsOverviewStatsWidget extends StatsOverviewWidget
         'lg' => 4,
         'xl' => 4,
     ];
+
+    public function getSectionContentComponent(): Component
+    {
+        return Section::make()
+            ->heading($this->getHeading())
+            ->description($this->getDescription())
+            ->icon(Heroicon::OutlinedPresentationChartLine)
+            ->iconColor('primary')
+            ->schema($this->getCachedStats())
+            ->columns($this->getColumns())
+            ->contained(true)
+            ->gridContainer();
+    }
 
     protected function getStats(): array
     {
