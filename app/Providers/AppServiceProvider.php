@@ -21,8 +21,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (! $this->app->runningInConsole() && ($rootUrl = config('app.url'))) {
-            \Illuminate\Support\Facades\URL::forceRootUrl($rootUrl);
+        if (! $this->app->runningInConsole()) {
+            $request = request();
+            $rootUrl = config('app.url');
+
+            // Avoid broken URLs when production still has a localhost APP_URL.
+            if (is_string($rootUrl) && str_contains($rootUrl, 'localhost') && $request->getHost()) {
+                $rootUrl = $request->getSchemeAndHttpHost();
+            }
+
+            if ($rootUrl) {
+                \Illuminate\Support\Facades\URL::forceRootUrl($rootUrl);
+            }
+
+            if ($request->header('X-Forwarded-Proto') === 'https' || $request->isSecure()) {
+                \Illuminate\Support\Facades\URL::forceScheme('https');
+                config(['session.secure' => true]);
+            }
         }
 
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Booking::class, \App\Policies\BookingPolicy::class);
