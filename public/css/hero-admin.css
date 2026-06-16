@@ -218,6 +218,18 @@ html.dark .fi-topbar {
 .fi-panel-admin .fi-sidebar,
 .fi-panel-agency .fi-sidebar {
     visibility: visible !important;
+    transform: translateX(0) !important;
+}
+
+.fi-panel-admin .fi-topbar-ctn,
+.fi-panel-agency .fi-topbar-ctn {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.fi-panel-admin .fi-topbar-start,
+.fi-panel-agency .fi-topbar-start {
+    display: flex !important;
 }
 
 .fi-page .fi-page-header-heading {

@@ -78,12 +78,28 @@ class AdminPanelProvider extends PanelProvider
             ->renderHook(
                 PanelsRenderHook::HEAD_START,
                 fn (): string => '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />'
-                    .'<style id="hero-filament-fix">html.fi .fi-main-ctn,html.fi .fi-layout,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}html.fi .fi-main-ctn{display:flex!important;min-height:calc(100dvh - 4rem)!important}</style>',
+                    .'<style id="hero-filament-fix">'
+                    .'html.fi .fi-topbar-ctn,html.fi .fi-layout,html.fi .fi-main-ctn,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}'
+                    .'html.fi .fi-main-ctn,html.fi .fi-layout{display:flex!important}'
+                    .'html.fi .fi-main-ctn{min-height:calc(100dvh - 4rem)!important}'
+                    .'html.fi .fi-sidebar{transform:translateX(0)!important;width:var(--sidebar-width,20rem)!important}'
+                    .'html.fi .fi-topbar-start{display:flex!important}'
+                    .'</style>',
+            )
+            ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn (): string => '<script id="hero-filament-fallback">'
+                    .'(function(){function s(){document.querySelectorAll(".fi-sidebar").forEach(function(e){e.classList.add("fi-sidebar-open")});'
+                    .'document.querySelectorAll(".fi-main-ctn").forEach(function(e){e.style.setProperty("opacity","1","important");e.style.setProperty("display","flex","important")});'
+                    .'document.querySelectorAll(".fi-topbar-ctn [x-cloak],.fi-sidebar[x-cloak]").forEach(function(e){e.removeAttribute("x-cloak")})}'
+                    .'document.addEventListener("DOMContentLoaded",function(){setTimeout(s,1500)});'
+                    .'if(document.readyState!=="loading")setTimeout(s,1500)})();'
+                    .'</script>',
             )
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
                 fn (): string => '<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />'
-                    .'<link href="'.asset('css/hero-admin-live.css').'?v=7" rel="stylesheet" />',
+                    .'<link href="'.asset('css/hero-admin-live.css').'?v=8" rel="stylesheet" />',
             );
     }
 }
