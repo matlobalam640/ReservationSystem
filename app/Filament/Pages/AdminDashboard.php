@@ -4,16 +4,23 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\BookingsByChannelChart;
 use App\Filament\Widgets\BookingsTrendChart;
+use App\Filament\Widgets\DashboardWelcomeWidget;
 use App\Filament\Widgets\OpsOverviewStatsWidget;
 use App\Filament\Widgets\QuickActionsWidget;
 use App\Filament\Widgets\RecentBookingsTableWidget;
 use App\Filament\Widgets\UpcomingFlightsTableWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Support\Enums\Width;
+use Illuminate\Contracts\Support\Htmlable;
 
 class AdminDashboard extends BaseDashboard
 {
-    protected static ?string $title = 'Operations Dashboard';
+    protected static ?string $navigationLabel = 'Dashboard';
+
+    public function getTitle(): string | Htmlable
+    {
+        return '';
+    }
 
     public function getMaxContentWidth(): Width | string | null
     {
@@ -38,6 +45,7 @@ class AdminDashboard extends BaseDashboard
     public function getWidgets(): array
     {
         return [
+            DashboardWelcomeWidget::class,
             OpsOverviewStatsWidget::class,
             QuickActionsWidget::class,
             BookingsTrendChart::class,

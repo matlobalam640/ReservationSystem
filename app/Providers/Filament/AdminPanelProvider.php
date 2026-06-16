@@ -11,6 +11,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -65,6 +66,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 RedirectToAppLogin::class,
-            ]);
+            ])
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => '<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />'
+                    .'<link href="'.asset('css/hero-admin.css').'" rel="stylesheet" />',
+            );
     }
 }
