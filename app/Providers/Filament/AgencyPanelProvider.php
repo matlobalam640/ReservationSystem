@@ -10,11 +10,15 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AgencyPanelProvider extends PanelProvider
@@ -26,8 +30,12 @@ class AgencyPanelProvider extends PanelProvider
             ->path('agency')
             ->login(false)
             ->brandName('HERO Agency Portal')
+            ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
+            ->brandLogoHeight('2.5rem')
+            ->maxContentWidth(Width::Full)
             ->colors(['primary' => Color::Amber])
             ->discoverResources(in: app_path('Filament/Agency/Resources'), for: 'App\Filament\Agency\Resources')
+            ->discoverWidgets(in: app_path('Filament/Agency/Widgets'), for: 'App\Filament\Agency\Widgets')
             ->pages([AgencyDashboard::class])
             ->middleware([
                 EncryptCookies::class,
@@ -40,6 +48,11 @@ class AgencyPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([RedirectToAppLogin::class]);
+            ->authMiddleware([RedirectToAppLogin::class])
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => '<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />'
+                    .'<link href="'.asset('css/hero-admin.css').'?v=4" rel="stylesheet" />',
+            );
     }
 }

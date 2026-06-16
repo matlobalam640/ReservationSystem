@@ -570,26 +570,30 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
    Portal-wide elegance — sections, pages, tables, forms
    ══════════════════════════════════════════════════════════ */
 
-.fi-panel-admin .fi-main-ctn {
+.fi-panel-admin,
+.fi-panel-agency .fi-main-ctn {
     padding-left: 1.25rem !important;
     padding-right: 1.25rem !important;
 }
 
 @media (min-width: 1024px) {
-    .fi-panel-admin .fi-main-ctn {
+    .fi-panel-admin,
+.fi-panel-agency .fi-main-ctn {
         padding-left: 1.75rem !important;
         padding-right: 1.75rem !important;
     }
 }
 
 /* Page headers (all admin pages) */
-.fi-panel-admin .fi-page-header {
+.fi-panel-admin,
+.fi-panel-agency .fi-page-header {
     margin-bottom: 1.5rem !important;
     padding-bottom: 1.25rem !important;
     border-bottom: 1px solid var(--hero-border);
 }
 
-.fi-panel-admin .fi-page-header-heading {
+.fi-panel-admin,
+.fi-panel-agency .fi-page-header-heading {
     font-size: 1.75rem !important;
     font-weight: 700 !important;
     color: var(--hero-text) !important;
@@ -597,7 +601,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     line-height: 1.2 !important;
 }
 
-.fi-panel-admin .fi-page-header-subheading {
+.fi-panel-admin,
+.fi-panel-agency .fi-page-header-subheading {
     color: var(--hero-text-muted) !important;
     font-size: 0.95rem !important;
     margin-top: 0.35rem !important;
@@ -606,7 +611,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
 }
 
 /* Section cards — unified HERO card style */
-.fi-panel-admin .fi-section:not(.fi-aside) {
+.fi-panel-admin,
+.fi-panel-agency .fi-section:not(.fi-aside) {
     border-radius: var(--hero-radius) !important;
     background: var(--hero-card) !important;
     box-shadow: var(--hero-shadow) !important;
@@ -615,12 +621,14 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     --tw-ring-shadow: none !important;
 }
 
-.fi-panel-admin .fi-section:not(.fi-section-not-contained):not(.fi-aside) {
+.fi-panel-admin,
+.fi-panel-agency .fi-section:not(.fi-section-not-contained):not(.fi-aside) {
     overflow: hidden;
 }
 
 /* Section headers — amber accent + refined typography */
-.fi-panel-admin .fi-section-header {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-header {
     position: relative;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
@@ -630,7 +638,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     border-bottom: 1px solid var(--hero-border) !important;
 }
 
-.fi-panel-admin .fi-section-header::before {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-header::before {
     content: '';
     position: absolute;
     left: 0;
@@ -641,7 +650,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     border-radius: var(--hero-radius) 0 0 0;
 }
 
-.fi-panel-admin .fi-section-header-heading {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-header-heading {
     font-size: 1.125rem !important;
     font-weight: 700 !important;
     color: var(--hero-text) !important;
@@ -649,27 +659,32 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     line-height: 1.3 !important;
 }
 
-.fi-panel-admin .fi-section-header-description {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-header-description {
     font-size: 0.875rem !important;
     color: var(--hero-text-muted) !important;
     line-height: 1.5 !important;
     margin-top: 0.15rem !important;
 }
 
-.fi-panel-admin .fi-section-header .fi-icon {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-header .fi-icon {
     color: var(--hero-amber-dark) !important;
 }
 
-.fi-panel-admin .fi-section-content-ctn {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-content-ctn {
     border-top: none !important;
 }
 
-.fi-panel-admin .fi-section-content {
+.fi-panel-admin,
+.fi-panel-agency .fi-section-content {
     padding: 1.25rem 1.5rem !important;
 }
 
 /* Not-contained sections (legacy widgets) — still card-wrapped */
-.fi-panel-admin .fi-section.fi-section-not-contained {
+.fi-panel-admin,
+.fi-panel-agency .fi-section.fi-section-not-contained {
     background: var(--hero-card) !important;
     border: 1px solid var(--hero-border) !important;
     border-radius: var(--hero-radius) !important;
@@ -677,20 +692,24 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     overflow: hidden;
 }
 
-.fi-panel-admin .fi-section.fi-section-not-contained > .fi-section-header {
+.fi-panel-admin,
+.fi-panel-agency .fi-section.fi-section-not-contained > .fi-section-header {
     border-bottom: 1px solid var(--hero-border) !important;
 }
 
-.fi-panel-admin .fi-section.fi-section-not-contained > .fi-section-content-ctn > .fi-section-content {
+.fi-panel-admin,
+.fi-panel-agency .fi-section.fi-section-not-contained > .fi-section-content-ctn > .fi-section-content {
     padding: 1rem 1.25rem 1.25rem !important;
 }
 
 /* Stats overview — integrated card + stat tiles */
-.fi-panel-admin .fi-wi-stats-overview .fi-section-header {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview .fi-section-header {
     padding-left: 1.5rem !important;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat {
     border-radius: 0.75rem !important;
     border: 1px solid var(--hero-border) !important;
     background: var(--hero-stat-bg) !important;
@@ -699,7 +718,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     overflow: hidden;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat::before {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat::before {
     content: '';
     position: absolute;
     top: 0;
@@ -710,31 +730,36 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     opacity: 0.85;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat-content {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat-content {
     padding: 0.85rem 1rem 1rem !important;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat-label {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat-label {
     font-size: 0.8rem !important;
     font-weight: 600 !important;
     color: var(--hero-text-muted) !important;
     text-transform: none !important;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat-value {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat-value {
     font-size: 1.85rem !important;
     font-weight: 700 !important;
     color: var(--hero-text) !important;
     letter-spacing: -0.02em !important;
 }
 
-.fi-panel-admin .fi-wi-stats-overview-stat-description {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-stats-overview-stat-description {
     font-size: 0.78rem !important;
     color: var(--hero-text-subtle) !important;
 }
 
 /* Resource tables */
-.fi-panel-admin .fi-ta-ctn {
+.fi-panel-admin,
+.fi-panel-agency .fi-ta-ctn {
     border-radius: var(--hero-radius) !important;
     border: 1px solid var(--hero-border) !important;
     box-shadow: var(--hero-shadow) !important;
@@ -742,7 +767,8 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     background: var(--hero-card) !important;
 }
 
-.fi-panel-admin .fi-ta-header-cell {
+.fi-panel-admin,
+.fi-panel-agency .fi-ta-header-cell {
     background: var(--hero-surface) !important;
     color: var(--hero-text-muted) !important;
     font-weight: 600 !important;
@@ -751,51 +777,61 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
     letter-spacing: 0.03em;
 }
 
-.fi-panel-admin .fi-ta-row:hover {
+.fi-panel-admin,
+.fi-panel-agency .fi-ta-row:hover {
     background: var(--hero-row-hover) !important;
 }
 
-.fi-panel-admin .fi-ta-row.fi-selected {
+.fi-panel-admin,
+.fi-panel-agency .fi-ta-row.fi-selected {
     background: var(--hero-amber-soft) !important;
 }
 
 /* Forms on edit/create pages */
-.fi-panel-admin .fi-fo-component-ctn {
+.fi-panel-admin,
+.fi-panel-agency .fi-fo-component-ctn {
     border-radius: var(--hero-radius);
 }
 
-.fi-panel-admin .fi-input-wrp {
+.fi-panel-admin,
+.fi-panel-agency .fi-input-wrp {
     border-radius: 0.5rem !important;
 }
 
-.fi-panel-admin .fi-btn.fi-color-primary {
+.fi-panel-admin,
+.fi-panel-agency .fi-btn.fi-color-primary {
     font-weight: 600 !important;
     box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
 }
 
-.fi-panel-admin .fi-btn.fi-color-primary:hover {
+.fi-panel-admin,
+.fi-panel-agency .fi-btn.fi-color-primary:hover {
     box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
 }
 
 /* Topbar search */
-.fi-panel-admin .fi-topbar .fi-global-search-field .fi-input-wrp {
+.fi-panel-admin,
+.fi-panel-agency .fi-topbar .fi-global-search-field .fi-input-wrp {
     background: var(--hero-surface) !important;
     border-color: var(--hero-border) !important;
 }
 
 /* Breadcrumbs */
-.fi-panel-admin .fi-breadcrumbs-item-label {
+.fi-panel-admin,
+.fi-panel-agency .fi-breadcrumbs-item-label {
     color: var(--hero-text-muted) !important;
     font-weight: 500 !important;
 }
 
-.fi-panel-admin .fi-breadcrumbs-item:last-child .fi-breadcrumbs-item-label {
+.fi-panel-admin,
+.fi-panel-agency .fi-breadcrumbs-item:last-child .fi-breadcrumbs-item-label {
     color: var(--hero-text) !important;
     font-weight: 600 !important;
 }
 
 /* Widget grid breathing room */
-.fi-panel-admin .fi-page .fi-wi {
+.fi-panel-admin,
+.fi-panel-agency .fi-page .fi-wi {
     animation: hero-fade-in 0.35s ease-out;
 }
 
@@ -805,22 +841,26 @@ html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: 
 }
 
 /* Quick actions — match section header style */
-.fi-panel-admin .hero-quick-actions-wrap .fi-section-header::before {
+.fi-panel-admin,
+.fi-panel-agency .hero-quick-actions-wrap .fi-section-header::before {
     display: block;
 }
 
 /* Chart widgets */
-.fi-panel-admin .fi-wi-chart .fi-section-content {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-chart .fi-section-content {
     padding-top: 0.5rem !important;
 }
 
 /* Table widgets inside dashboard */
-.fi-panel-admin .fi-wi-table .fi-ta-ctn {
+.fi-panel-admin,
+.fi-panel-agency .fi-wi-table .fi-ta-ctn {
     border: none !important;
     box-shadow: none !important;
 }
 
 /* Notifications / badges */
-.fi-panel-admin .fi-badge {
+.fi-panel-admin,
+.fi-panel-agency .fi-badge {
     font-weight: 600 !important;
 }

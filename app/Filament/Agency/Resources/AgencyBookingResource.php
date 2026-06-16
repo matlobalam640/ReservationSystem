@@ -42,12 +42,15 @@ class AgencyBookingResource extends Resource
     {
         return $table->columns([
             TextColumn::make('reference_number')->searchable(),
-            TextColumn::make('flightLeg.routeLabel')->label('Route'),
-            TextColumn::make('flightLeg.departure_at')->dateTime(),
+            TextColumn::make('flightLeg.origin')
+                ->label('Route')
+                ->state(fn (Booking $record): string => $record->flightLeg?->routeLabel() ?? '—'),
+            TextColumn::make('flightLeg.departure_at')->dateTime()->label('Departure'),
             TextColumn::make('status')->badge(),
             TextColumn::make('total_amount')->money('usd'),
-            TextColumn::make('commissionLedger.agency_amount')
+            TextColumn::make('commission')
                 ->label('Commission')
+                ->state(fn (Booking $record) => $record->commissionLedger()->value('agency_amount'))
                 ->money('usd')
                 ->placeholder('—'),
         ])

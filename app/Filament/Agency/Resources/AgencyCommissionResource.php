@@ -36,7 +36,9 @@ class AgencyCommissionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('booking.reference_number')->label('Booking')->searchable(),
-                TextColumn::make('booking.flightLeg.routeLabel')->label('Route'),
+                TextColumn::make('route')
+                    ->label('Route')
+                    ->state(fn (CommissionLedger $record): string => $record->booking?->flightLeg?->routeLabel() ?? '—'),
                 TextColumn::make('agency_amount')->money('usd')->label('Your commission'),
                 TextColumn::make('hero_amount')->money('usd')->label('HERO share'),
                 TextColumn::make('status')->badge(),

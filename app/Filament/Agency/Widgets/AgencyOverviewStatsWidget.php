@@ -9,14 +9,38 @@ use App\Filament\Agency\Resources\AgencyFlightScheduleResource;
 use App\Models\Booking;
 use App\Models\CommissionLedger;
 use App\Models\FlightLeg;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Section;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class AgencyOverviewStatsWidget extends StatsOverviewWidget
 {
+    protected static ?int $sort = 1;
+
     protected ?string $heading = 'Agency overview';
 
     protected ?string $description = 'Your bookings, commissions, and available schedules';
+
+    protected int | array | null $columns = [
+        'default' => 1,
+        'sm' => 2,
+        'lg' => 4,
+    ];
+
+    public function getSectionContentComponent(): Component
+    {
+        return Section::make()
+            ->heading($this->getHeading())
+            ->description($this->getDescription())
+            ->icon(Heroicon::OutlinedPresentationChartLine)
+            ->iconColor('primary')
+            ->schema($this->getCachedStats())
+            ->columns($this->getColumns())
+            ->contained(true)
+            ->gridContainer();
+    }
 
     protected function getStats(): array
     {

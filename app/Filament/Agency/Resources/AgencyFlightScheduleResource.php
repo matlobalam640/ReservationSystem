@@ -37,9 +37,11 @@ class AgencyFlightScheduleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('routeLabel')->label('Route'),
+                TextColumn::make('origin')
+                    ->label('Route')
+                    ->state(fn (FlightLeg $record): string => $record->routeLabel()),
                 TextColumn::make('departure_at')->dateTime()->sortable(),
-                TextColumn::make('aircraft.registration')->label('Aircraft'),
+                TextColumn::make('aircraft.tail_number')->label('Aircraft'),
                 TextColumn::make('visibility')->badge(),
                 TextColumn::make('base_price')->money('usd'),
                 TextColumn::make('available_seats_count')
