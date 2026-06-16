@@ -35,10 +35,12 @@ class AppServiceProvider extends ServiceProvider
                 \Illuminate\Support\Facades\URL::forceRootUrl($rootUrl);
             }
 
-            if ($request->header('X-Forwarded-Proto') === 'https' || $request->isSecure()) {
-                \Illuminate\Support\Facades\URL::forceScheme('https');
-                config(['session.secure' => true]);
-            }
+        if ($request->header('X-Forwarded-Proto') === 'https' || $request->isSecure()) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+            config(['session.secure' => true]);
+        } elseif (config('app.env') === 'production') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
         }
 
         \Illuminate\Support\Facades\Gate::policy(\App\Models\Booking::class, \App\Policies\BookingPolicy::class);

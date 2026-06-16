@@ -27,9 +27,24 @@ class TestAdminPage extends Command
 
         Auth::login($user);
 
+        $baseUrl = rtrim((string) config('app.url'), '/');
+        \Illuminate\Support\Facades\URL::forceRootUrl($baseUrl);
+        \Illuminate\Support\Facades\URL::forceScheme('https');
+
         $this->info('Route admin-dashboard: '.(Route::has('filament.admin.pages.admin-dashboard') ? 'yes' : 'no'));
 
-        $request = Request::create('/admin', 'GET');
+        $request = Request::create(
+            config('app.url').'/admin',
+            'GET',
+            [],
+            [],
+            [],
+            [
+                'HTTP_HOST' => parse_url((string) config('app.url'), PHP_URL_HOST),
+                'HTTPS' => 'on',
+                'HTTP_X_FORWARDED_PROTO' => 'https',
+            ],
+        );
         $response = $kernel->handle($request);
         $content = $response->getContent() ?: '';
 
