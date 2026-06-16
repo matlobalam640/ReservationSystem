@@ -55,7 +55,17 @@ class AgencyPanelProvider extends PanelProvider
             ->renderHook(
                 PanelsRenderHook::HEAD_START,
                 fn (): string => '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />'
-                    .'<style id="hero-filament-fix">html.fi .fi-main-ctn,html.fi .fi-layout,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}html.fi .fi-main-ctn{display:flex!important;min-height:calc(100dvh - 4rem)!important}</style>',
+                    .'<style id="hero-filament-fix">'
+                    .'html,body{height:auto!important;min-height:100dvh!important}'
+                    .'body.fi-body{display:contents!important;overflow:visible!important}'
+                    .'html.fi .fi-topbar-ctn,html.fi .fi-layout,html.fi .fi-main-ctn,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}'
+                    .'html.fi .fi-main-ctn,html.fi .fi-layout{display:flex!important}'
+                    .'html.fi .fi-main-ctn{min-height:calc(100dvh - 4rem)!important}'
+                    .'html.fi .fi-sidebar{transform:translateX(0)!important;width:var(--sidebar-width,20rem)!important}'
+                    .'html.fi .fi-topbar-start{display:flex!important}'
+                    .'html.fi [x-cloak],html.fi [x-cloak=""],html.fi [x-cloak="x-cloak"],html.fi [x-cloak="-lg"],html.fi [x-cloak="-lg"],html.fi [x-cloak="lg"]{display:revert!important}'
+                    .'html.fi .fi-sidebar-close-overlay{display:none!important}'
+                    .'</style>',
             )
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
