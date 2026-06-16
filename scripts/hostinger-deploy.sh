@@ -71,9 +71,10 @@ php artisan db:seed --force
 
 echo "==> Storage link + caches..."
 php artisan storage:link 2>/dev/null || true
+php artisan route:clear
 php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan filament:optimize 2>/dev/null || true
+# Do not run route:cache — it breaks Filament panel routes on Hostinger.
 
 chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
