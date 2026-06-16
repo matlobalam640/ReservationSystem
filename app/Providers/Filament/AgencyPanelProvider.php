@@ -30,6 +30,7 @@ class AgencyPanelProvider extends PanelProvider
             ->path('agency')
             ->login(false)
             ->homeUrl('/agency')
+            ->broadcasting(false)
             ->brandName('HERO Agency Portal')
             ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
             ->brandLogoHeight('2.5rem')
@@ -53,7 +54,8 @@ class AgencyPanelProvider extends PanelProvider
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
                 fn (): string => '<link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />'
-                    .'<link href="'.asset('css/hero-admin.css').'?v=5" rel="stylesheet" />',
+                    .'<link href="'.asset('css/hero-admin.css').'?v=6" rel="stylesheet" />'
+                    .'<style>.fi-panel-admin .fi-main-ctn,.fi-panel-agency .fi-main-ctn{opacity:1!important;display:flex!important;min-height:calc(100dvh - 4rem)!important}</style>',
             );
     }
 }
