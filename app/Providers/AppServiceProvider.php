@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             // Avoid broken URLs when production still has a localhost APP_URL.
             if (is_string($rootUrl) && str_contains($rootUrl, 'localhost') && $request->getHost()) {
                 $rootUrl = $request->getSchemeAndHttpHost();
+                config(['app.url' => $rootUrl]);
             }
 
             if ($rootUrl) {

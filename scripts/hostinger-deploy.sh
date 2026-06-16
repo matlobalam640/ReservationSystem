@@ -76,8 +76,8 @@ php artisan config:clear
 php artisan filament:optimize-clear
 php artisan cache:clear
 php artisan config:cache
-# Rebuild Filament component cache (never use route:cache on shared hosting).
-php artisan filament:optimize
+# Do not run filament:optimize on shared hosting — empty/corrupt panel cache breaks /admin.
+# php artisan filament:optimize
 for cache_file in bootstrap/cache/filament/panels/*.php; do
   if [ ! -s "$cache_file" ]; then
     echo "!! Removing empty Filament cache: $cache_file"

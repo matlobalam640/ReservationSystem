@@ -35,7 +35,14 @@ class TestAdminPage extends Command
 
         $this->info('Status: '.$response->getStatusCode());
         $this->info('Size: '.strlen($content));
-        $this->line(substr($content, 0, 1500));
+
+        $path = storage_path('app/admin-test.html');
+        file_put_contents($path, $content);
+        $this->info('Saved: '.$path);
+        $this->info('Scripts: '.substr_count(strtolower($content), '<script'));
+        $this->info('Livewire refs: '.substr_count(strtolower($content), 'livewire'));
+
+        $this->line(substr($content, 0, 800));
 
         $kernel->terminate($request, $response);
 
