@@ -33,12 +33,17 @@
         .nav-logout-form { display: inline; margin: 0; }
         .nav-logout-form button { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
         .auth-banner {
-            max-width: 1280px; margin: 0 auto; padding: 0.85rem 2rem;
-            background: rgba(245, 158, 11, 0.12); border-bottom: 1px solid rgba(245, 158, 11, 0.25);
-            color: #f8fafc; font-size: 0.9rem;
+            width: 100%;
+            padding: 0.75rem 2rem;
+            background: #fffbeb;
+            border-bottom: 1px solid #fde68a;
+            color: #334155;
+            font-size: 0.9rem;
+            text-align: center;
         }
-        .auth-banner a { color: #fbbf24; font-weight: 600; text-decoration: none; }
-        .auth-banner a:hover { text-decoration: underline; }
+        .auth-banner strong { color: #0f172a; }
+        .auth-banner a { color: #b45309; font-weight: 600; text-decoration: none; }
+        .auth-banner a:hover { color: #d97706; text-decoration: underline; }
         main { width: 100%; }
         main.main-contained .page-body { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
         .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
