@@ -204,6 +204,22 @@ html.dark .fi-topbar {
     background: var(--hero-surface) !important;
 }
 
+/*
+ * Filament sets .fi-main-ctn to opacity:0 until Alpine binds inline styles.
+ * If Livewire/Alpine fails to boot on shared hosting, the admin appears blank.
+ */
+.fi-panel-admin .fi-main-ctn,
+.fi-panel-agency .fi-main-ctn {
+    opacity: 1 !important;
+    display: flex !important;
+    min-height: calc(100dvh - 4rem) !important;
+}
+
+.fi-panel-admin .fi-sidebar,
+.fi-panel-agency .fi-sidebar {
+    visibility: visible !important;
+}
+
 .fi-page .fi-page-header-heading {
     font-size: 1.65rem;
     font-weight: 700;
