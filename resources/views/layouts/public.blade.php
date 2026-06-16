@@ -579,6 +579,7 @@
     @endif
 
     @auth
+        @unless(request()->routeIs('account'))
         <div class="auth-banner">
             Signed in as <strong>{{ auth()->user()->name }}</strong>.
             @if(auth()->user()->passenger_id)
@@ -589,6 +590,7 @@
                 <a href="{{ url('/admin') }}">Open Admin Portal</a>.
             @endif
         </div>
+        @endunless
     @endauth
 
     <main class="@yield('main_class', 'main-contained')">

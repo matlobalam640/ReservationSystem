@@ -302,7 +302,7 @@
     </div>
 </section>
 
-<section class="section section-light">
+<section id="contact" class="section section-light">
     <div class="container contact-block">
         <h2>{{ $contact['chat_label'] ?? 'Contact us' }}</h2>
         <p class="muted" style="margin:0.75rem auto 1rem;max-width:560px;">
