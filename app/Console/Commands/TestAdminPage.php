@@ -23,13 +23,9 @@ class TestAdminPage extends Command
     protected function testLiveHttp(): int
     {
         $baseUrl = rtrim((string) config('app.url'), '/');
-        $cookieJar = storage_path('app/admin-live-cookies.txt');
+        $cookieJar = new \GuzzleHttp\Cookie\CookieJar;
 
-        if (is_file($cookieJar)) {
-            unlink($cookieJar);
-        }
-
-        $loginPage = Http::withOptions(['cookies' => true])->get($baseUrl.'/login');
+        $loginPage = Http::withOptions(['cookies' => $cookieJar])->get($baseUrl.'/login');
 
         if (! $loginPage->successful()) {
             $this->error('Login page failed: '.$loginPage->status());
@@ -43,7 +39,7 @@ class TestAdminPage extends Command
             return self::FAILURE;
         }
 
-        $loginResponse = Http::withOptions(['cookies' => true, 'allow_redirects' => false])
+        $loginResponse = Http::withOptions(['cookies' => $cookieJar, 'allow_redirects' => false])
             ->asForm()
             ->post($baseUrl.'/login', [
                 '_token' => $matches[1],
@@ -53,8 +49,7 @@ class TestAdminPage extends Command
 
         $this->info('Login POST status: '.$loginResponse->status());
 
-        $adminResponse = Http::withOptions(['cookies' => true])
-            ->withHeaders(['Cookie' => $this->cookieHeaderFromResponses($loginPage, $loginResponse)])
+        $adminResponse = Http::withOptions(['cookies' => $cookieJar])
             ->get($baseUrl.'/admin');
 
         return $this->reportResponse($adminResponse->status(), $adminResponse->body(), storage_path('app/admin-live.html'));
@@ -121,25 +116,5 @@ class TestAdminPage extends Command
         }
 
         return self::SUCCESS;
-    }
-
-    /**
-     * @param  \Illuminate\Http\Client\Response  ...$responses
-     */
-    protected function cookieHeaderFromResponses(...$responses): string
-    {
-        $cookies = [];
-
-        foreach ($responses as $response) {
-            foreach ($response->headers()['Set-Cookie'] ?? [] as $cookie) {
-                $pair = explode(';', $cookie)[0] ?? '';
-                if ($pair !== '') {
-                    [$name] = explode('=', $pair, 2);
-                    $cookies[$name] = $pair;
-                }
-            }
-        }
-
-        return implode('; ', array_values($cookies));
     }
 }
