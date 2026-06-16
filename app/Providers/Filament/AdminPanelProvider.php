@@ -2,14 +2,15 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AdminDashboard;
 use App\Http\Middleware\RedirectToAppLogin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -27,19 +28,18 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(false)
             ->brandName('HERO Reservation System')
+            ->brandLogo(asset(config('hero.branding.logo')))
+            ->brandLogoHeight('2.25rem')
+            ->maxContentWidth(Width::Full)
             ->colors([
                 'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
-                Dashboard::class,
+                AdminDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->widgets([
-                \App\Filament\Widgets\TodayFlightsWidget::class,
-                \App\Filament\Widgets\LoadAlertsWidget::class,
-            ])
             ->navigationItems([
                 \Filament\Navigation\NavigationItem::make('Check-In')
                     ->url(fn () => route('check-in.index'))
