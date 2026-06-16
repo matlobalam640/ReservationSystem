@@ -232,6 +232,25 @@ html.dark .fi-topbar {
     display: flex !important;
 }
 
+/* If Alpine/Livewire is blocked, x-cloak can hide everything on small screens */
+.fi-panel-admin [x-cloak],
+.fi-panel-admin [x-cloak=''],
+.fi-panel-admin [x-cloak='x-cloak'],
+.fi-panel-admin [x-cloak='-lg'],
+.fi-panel-admin [x-cloak='lg'],
+.fi-panel-agency [x-cloak],
+.fi-panel-agency [x-cloak=''],
+.fi-panel-agency [x-cloak='x-cloak'],
+.fi-panel-agency [x-cloak='-lg'],
+.fi-panel-agency [x-cloak='lg'] {
+    display: revert !important;
+}
+
+.fi-panel-admin .fi-sidebar-close-overlay,
+.fi-panel-agency .fi-sidebar-close-overlay {
+    display: none !important;
+}
+
 .fi-page .fi-page-header-heading {
     font-size: 1.65rem;
     font-weight: 700;

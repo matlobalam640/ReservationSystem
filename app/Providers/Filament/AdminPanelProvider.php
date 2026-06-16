@@ -84,6 +84,8 @@ class AdminPanelProvider extends PanelProvider
                     .'html.fi .fi-main-ctn{min-height:calc(100dvh - 4rem)!important}'
                     .'html.fi .fi-sidebar{transform:translateX(0)!important;width:var(--sidebar-width,20rem)!important}'
                     .'html.fi .fi-topbar-start{display:flex!important}'
+                    .'html.fi [x-cloak],html.fi [x-cloak=""],html.fi [x-cloak="x-cloak"],html.fi [x-cloak="-lg"],html.fi [x-cloak="lg"]{display:revert!important}'
+                    .'html.fi .fi-sidebar-close-overlay{display:none!important}'
                     .'</style>',
             )
             ->renderHook(
