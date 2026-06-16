@@ -72,9 +72,18 @@ php artisan db:seed --force
 echo "==> Storage link + caches..."
 php artisan storage:link 2>/dev/null || true
 php artisan route:clear
+php artisan config:clear
+php artisan filament:optimize-clear
+php artisan cache:clear
 php artisan config:cache
-php artisan filament:optimize 2>/dev/null || true
-# Do not run route:cache — it breaks Filament panel routes on Hostinger.
+# Rebuild Filament component cache (never use route:cache on shared hosting).
+php artisan filament:optimize
+for cache_file in bootstrap/cache/filament/panels/*.php; do
+  if [ ! -s "$cache_file" ]; then
+    echo "!! Removing empty Filament cache: $cache_file"
+    rm -f "$cache_file"
+  fi
+done
 
 chmod -R 775 storage bootstrap/cache 2>/dev/null || true
 
