@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Filament\Resources\Flights\Pages;
+
+use App\Filament\Resources\Flights\FlightResource;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreateFlight extends CreateRecord
+{
+    protected static string $resource = FlightResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['created_by'] = auth()->id();
+
+        return $data;
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('edit', ['record' => $this->getRecord()]);
+    }
+}
