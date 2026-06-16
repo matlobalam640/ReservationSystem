@@ -49,22 +49,26 @@ class ExtendedModuleSeeder extends Seeder
 
         GroundHandler::create(['name' => 'JCI Ground Services', 'default_rate' => 250]);
 
-        $passenger = Passenger::create([
-            'first_name' => 'John',
-            'last_name' => 'Smith',
-            'email' => 'john@example.com',
-            'phone' => '+509-555-0100',
-        ]);
+        $passenger = Passenger::firstOrCreate(
+            ['email' => 'john@example.com'],
+            [
+                'first_name' => 'John',
+                'last_name' => 'Smith',
+                'phone' => '+509-555-0100',
+            ],
+        );
 
-        HeroMembership::create([
-            'passenger_id' => $passenger->id,
-            'member_code' => 'HERO-VIP-001',
-            'plan_level' => 'VIP',
-            'member_name' => 'John Smith',
-            'email' => 'john@example.com',
-            'expires_at' => now()->addYear(),
-            'is_active' => true,
-        ]);
+        HeroMembership::firstOrCreate(
+            ['member_code' => 'HERO-VIP-001'],
+            [
+                'passenger_id' => $passenger->id,
+                'plan_level' => 'VIP',
+                'member_name' => 'John Smith',
+                'email' => 'john@example.com',
+                'expires_at' => now()->addYear(),
+                'is_active' => true,
+            ],
+        );
 
         MembershipBenefitRule::create([
             'plan_level' => 'VIP',
@@ -88,5 +92,6 @@ class ExtendedModuleSeeder extends Seeder
         $customerUser->update(['passenger_id' => $passenger->id]);
 
         $this->call(ReconciliationSampleSeeder::class);
+        $this->call(CustomerSampleSeeder::class);
     }
 }

@@ -26,9 +26,19 @@
             width: auto;
             max-width: min(220px, 55vw);
         }
-        .nav-links { display: flex; gap: 1rem; align-items: center; }
+        .nav-links { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
         .nav-links a:not(.btn) { color: #f59e0b; text-decoration: none; font-weight: 600; }
         .nav-links .btn-primary { background: #f59e0b; color: #0f172a !important; }
+        .nav-user { color: #cbd5e1; font-size: 0.875rem; font-weight: 500; }
+        .nav-logout-form { display: inline; margin: 0; }
+        .nav-logout-form button { font-size: 0.85rem; padding: 0.5rem 0.9rem; }
+        .auth-banner {
+            max-width: 1280px; margin: 0 auto; padding: 0.85rem 2rem;
+            background: rgba(245, 158, 11, 0.12); border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+            color: #f8fafc; font-size: 0.9rem;
+        }
+        .auth-banner a { color: #fbbf24; font-weight: 600; text-decoration: none; }
+        .auth-banner a:hover { text-decoration: underline; }
         main { width: 100%; }
         main.main-contained .page-body { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
         .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
@@ -533,7 +543,22 @@
         </a>
         <div class="nav-links">
             <a href="{{ route('home') }}#flights">Book a Flight</a>
-            <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+            @auth
+                @if(auth()->user()->hasRole('agency'))
+                    <a href="{{ url('/agency') }}">Agency Portal</a>
+                @elseif(auth()->user()->hasAnyRole(['admin', 'reservations', 'dispatch', 'accounting', 'check-in', 'medical-dispatch']))
+                    <a href="{{ url('/admin') }}">Admin Portal</a>
+                @elseif(auth()->user()->passenger_id)
+                    <a href="{{ route('account') }}">My Account</a>
+                @endif
+                <span class="nav-user">{{ auth()->user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}" class="nav-logout-form">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Logout</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+            @endauth
         </div>
     </header>
 
@@ -547,6 +572,19 @@
             @endif
         </div>
     @endif
+
+    @auth
+        <div class="auth-banner">
+            Signed in as <strong>{{ auth()->user()->name }}</strong>.
+            @if(auth()->user()->passenger_id)
+                <a href="{{ route('account') }}">Go to My Account</a> to view membership, loyalty points, and upcoming flights.
+            @elseif(auth()->user()->hasRole('agency'))
+                <a href="{{ url('/agency') }}">Open Agency Portal</a> to manage bookings and commissions.
+            @elseif(auth()->user()->hasAnyRole(['admin', 'reservations', 'dispatch', 'accounting', 'check-in', 'medical-dispatch']))
+                <a href="{{ url('/admin') }}">Open Admin Portal</a>.
+            @endif
+        </div>
+    @endauth
 
     <main class="@yield('main_class', 'main-contained')">
         <div class="@yield('main_wrapper', 'page-body')">

@@ -182,6 +182,34 @@ class BookingService
             ->get();
     }
 
+    public function quotePrice(
+        FlightLeg $leg,
+        BookingChannel $channel,
+        array $addOnIds = [],
+        ?string $membershipCode = null,
+        ?array $passengerData = null,
+    ): float {
+        $membershipResult = null;
+
+        if ($membershipCode && $passengerData) {
+            $passengerName = trim(($passengerData['first_name'] ?? '').' '.($passengerData['last_name'] ?? ''));
+            $membershipResult = app(HeroMembershipService::class)->validateMember(
+                $membershipCode,
+                $passengerName,
+                $passengerData['email'] ?? null,
+                $passengerData['phone'] ?? null,
+            );
+
+            if (! ($membershipResult['valid'] ?? false)) {
+                $membershipResult = null;
+            }
+        }
+
+        $addOns = $this->resolveAddOns($addOnIds, $channel);
+
+        return $this->calculateTotal($leg, $addOns, $membershipResult);
+    }
+
     private function calculateTotal(FlightLeg $leg, Collection $addOns, ?array $membershipResult): float
     {
         $total = (float) ($leg->base_price ?? 0);

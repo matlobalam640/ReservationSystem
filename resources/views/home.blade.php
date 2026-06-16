@@ -14,7 +14,17 @@
     </p>
     <div class="hero-actions">
         <a href="#flights" class="btn btn-primary">View Available Flights</a>
-        <a href="{{ route('login') }}" class="btn btn-outline">Staff / Agency Login</a>
+        @auth
+            @if(auth()->user()->hasRole('agency'))
+                <a href="{{ url('/agency') }}" class="btn btn-outline">Agency Portal</a>
+            @elseif(auth()->user()->hasAnyRole(['admin', 'reservations', 'dispatch', 'accounting', 'check-in', 'medical-dispatch']))
+                <a href="{{ url('/admin') }}" class="btn btn-outline">Admin Portal</a>
+            @elseif(auth()->user()->passenger_id)
+                <a href="{{ route('account') }}" class="btn btn-outline">My Account</a>
+            @endif
+        @else
+            <a href="{{ route('login') }}" class="btn btn-outline">Staff / Agency Login</a>
+        @endauth
     </div>
 
     <form method="GET" action="{{ route('home') }}#flights" class="search-form">

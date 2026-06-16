@@ -74,7 +74,7 @@
                 <img src="{{ asset(config('hero.branding.logo')) }}" alt="HERO Client Rescue" class="brand-logo">
             </a>
             <h1><a href="{{ route('home') }}">Reservation System</a></h1>
-            <p>Sign in to your portal</p>
+            <p>Staff, agency, and customer sign in</p>
         </div>
 
         @if ($errors->any())

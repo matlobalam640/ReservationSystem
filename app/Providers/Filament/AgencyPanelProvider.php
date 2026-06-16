@@ -2,11 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\AgencyDashboard;
 use App\Http\Middleware\RedirectToAppLogin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -26,9 +26,9 @@ class AgencyPanelProvider extends PanelProvider
             ->path('agency')
             ->login(false)
             ->brandName('HERO Agency Portal')
-            ->colors(['primary' => Color::Blue])
+            ->colors(['primary' => Color::Amber])
             ->discoverResources(in: app_path('Filament/Agency/Resources'), for: 'App\Filament\Agency\Resources')
-            ->pages([Dashboard::class])
+            ->pages([AgencyDashboard::class])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

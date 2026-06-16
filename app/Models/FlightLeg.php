@@ -6,6 +6,7 @@ use App\Enums\LegStatus;
 use App\Enums\LegVisibility;
 use App\Enums\ReturnLegResale;
 use App\Services\SeatGenerator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -109,6 +110,18 @@ class FlightLeg extends Model
         $destination = config("hero.locations.{$this->destination}", strtoupper($this->destination));
 
         return $origin.' → '.$destination;
+    }
+
+    public function scopeBookableForAgency(Builder $query): Builder
+    {
+        return $query
+            ->whereIn('visibility', [LegVisibility::Public, LegVisibility::Agency])
+            ->where('status', LegStatus::Available)
+            ->where('departure_at', '>', now())
+            ->where(function (Builder $q) {
+                $q->where('is_return_leg', false)
+                    ->orWhereIn('return_leg_resale', [ReturnLegResale::Public, ReturnLegResale::AgencyOnly]);
+            });
     }
 
     public function cloneAsNewLeg(int $sortOrder): self

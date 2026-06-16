@@ -4,6 +4,7 @@ namespace App\Filament\Agency\Resources;
 
 use App\Filament\Agency\Resources\AgencyBookingResource\Pages\CreateAgencyBooking;
 use App\Filament\Agency\Resources\AgencyBookingResource\Pages\ListAgencyBookings;
+use App\Filament\Agency\Resources\AgencyBookingResource\Pages\ViewAgencyBooking;
 use App\Models\Booking;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -22,6 +23,8 @@ class AgencyBookingResource extends Resource
     protected static ?string $navigationLabel = 'My Bookings';
 
     protected static ?string $modelLabel = 'Booking';
+
+    protected static ?int $navigationSort = 1;
 
     public static function getEloquentQuery(): Builder
     {
@@ -43,7 +46,13 @@ class AgencyBookingResource extends Resource
             TextColumn::make('flightLeg.departure_at')->dateTime(),
             TextColumn::make('status')->badge(),
             TextColumn::make('total_amount')->money('usd'),
-        ])->defaultSort('created_at', 'desc');
+            TextColumn::make('commissionLedger.agency_amount')
+                ->label('Commission')
+                ->money('usd')
+                ->placeholder('—'),
+        ])
+            ->defaultSort('created_at', 'desc')
+            ->recordUrl(fn (Booking $record): string => static::getUrl('view', ['record' => $record]));
     }
 
     public static function getPages(): array
@@ -51,6 +60,7 @@ class AgencyBookingResource extends Resource
         return [
             'index' => ListAgencyBookings::route('/'),
             'create' => CreateAgencyBooking::route('/create'),
+            'view' => ViewAgencyBooking::route('/{record}'),
         ];
     }
 }

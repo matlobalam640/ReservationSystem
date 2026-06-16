@@ -17,6 +17,10 @@ class LoginRedirectService
             return Filament::getPanel('admin')->getUrl();
         }
 
+        if ($user->passenger_id) {
+            return route('account');
+        }
+
         return url('/');
     }
 }

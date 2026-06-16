@@ -64,7 +64,6 @@ class User extends Authenticatable implements FilamentUser
             'dispatch',
             'accounting',
             'check-in',
-            'agency',
             'medical-dispatch',
         ]);
     }

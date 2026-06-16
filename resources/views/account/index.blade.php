@@ -3,6 +3,9 @@
 @section('title', 'My Account')
 
 @section('content')
+<div style="margin-bottom:1rem;">
+    <a href="{{ route('home') }}" class="muted">&larr; Back to home</a>
+</div>
 <h1>My Account</h1>
 <p>Welcome, {{ $user->name }}</p>
 
