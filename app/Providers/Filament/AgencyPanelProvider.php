@@ -29,6 +29,7 @@ class AgencyPanelProvider extends PanelProvider
             ->id('agency')
             ->path('agency')
             ->login(false)
+            ->homeUrl('/agency')
             ->brandName('HERO Agency Portal')
             ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
             ->brandLogoHeight('2.5rem')

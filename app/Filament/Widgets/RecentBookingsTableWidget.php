@@ -32,7 +32,7 @@ class RecentBookingsTableWidget extends TableWidget
                 TextColumn::make('reference_number')
                     ->label('Reference')
                     ->searchable(),
-                TextColumn::make('flightLeg.route')
+                TextColumn::make('route_label')
                     ->label('Route')
                     ->state(fn (Booking $record): string => $record->flightLeg?->routeLabel() ?? '—'),
                 TextColumn::make('flightLeg.departure_at')

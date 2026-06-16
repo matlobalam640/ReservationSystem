@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(false)
+            ->homeUrl('/admin')
             ->brandName('HERO Reservation System')
             ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
             ->brandLogoHeight('2.5rem')

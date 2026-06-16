@@ -10,6 +10,8 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class AgencyDashboard extends BaseDashboard
 {
+    protected static ?string $slug = 'dashboard';
+
     protected static ?string $navigationLabel = 'Dashboard';
 
     public function getTitle(): string | Htmlable
