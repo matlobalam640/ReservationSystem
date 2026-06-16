@@ -79,6 +79,8 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::HEAD_START,
                 fn (): string => '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />'
                     .'<style id="hero-filament-fix">'
+                    .'html,body{height:auto!important;min-height:100dvh!important}'
+                    .'body.fi-body{display:block!important;overflow:visible!important}'
                     .'html.fi .fi-topbar-ctn,html.fi .fi-layout,html.fi .fi-main-ctn,html.fi .fi-sidebar,html.fi .fi-topbar{opacity:1!important;visibility:visible!important}'
                     .'html.fi .fi-main-ctn,html.fi .fi-layout{display:flex!important}'
                     .'html.fi .fi-main-ctn{min-height:calc(100dvh - 4rem)!important}'
