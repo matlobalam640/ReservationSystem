@@ -8,10 +8,36 @@
     --hero-amber-dark: #d97706;
     --hero-amber-soft: #fffbeb;
     --hero-surface: #f8fafc;
+    --hero-card: #ffffff;
+    --hero-text: #0f172a;
+    --hero-text-muted: #64748b;
+    --hero-text-subtle: #94a3b8;
     --hero-border: #e2e8f0;
     --hero-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
     --hero-shadow-hover: 0 14px 40px rgba(245, 158, 11, 0.14);
     --hero-radius: 0.875rem;
+    --hero-section-header-bg: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    --hero-stat-bg: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    --hero-topbar-bg: #ffffff;
+    --hero-row-hover: #fffbeb;
+    --hero-row-border: #f1f5f9;
+}
+
+html.dark {
+    --hero-amber-soft: rgba(245, 158, 11, 0.14);
+    --hero-surface: #0b1120;
+    --hero-card: #1e293b;
+    --hero-text: #f1f5f9;
+    --hero-text-muted: #94a3b8;
+    --hero-text-subtle: #64748b;
+    --hero-border: #334155;
+    --hero-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    --hero-shadow-hover: 0 14px 40px rgba(245, 158, 11, 0.18);
+    --hero-section-header-bg: linear-gradient(180deg, #1e293b 0%, #172033 100%);
+    --hero-stat-bg: linear-gradient(180deg, #1e293b 0%, #172033 100%);
+    --hero-topbar-bg: #1e293b;
+    --hero-row-hover: rgba(245, 158, 11, 0.1);
+    --hero-row-border: #334155;
 }
 
 /* Instrument Sans across admin */
@@ -43,18 +69,28 @@
     font-weight: 700;
     font-size: 0.88rem;
     line-height: 1.25;
-    color: var(--hero-navy);
+    color: var(--hero-text);
     white-space: nowrap;
 }
 
-/* Top bar: colored mark + dark text */
+/* Top bar: colored mark + text */
 .fi-topbar .hero-brand-img-mark {
     display: block;
     height: 1.75rem;
 }
 
-.fi-topbar .hero-brand-name {
-    color: var(--hero-navy);
+/* Dark topbar: white wordmark + text */
+html.dark .fi-topbar .hero-brand-img-mark {
+    display: none;
+}
+
+html.dark .fi-topbar .hero-brand-img-wordmark {
+    display: block;
+    height: 1.75rem;
+}
+
+html.dark .fi-topbar .hero-brand-name {
+    color: #fff;
 }
 
 /* Sidebar: white wordmark + white text */
@@ -154,9 +190,13 @@
 
 /* Top bar */
 .fi-topbar {
-    background: #fff !important;
+    background: var(--hero-topbar-bg) !important;
     border-bottom: 1px solid var(--hero-border) !important;
     box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+html.dark .fi-topbar {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Main content area */
@@ -167,7 +207,7 @@
 .fi-page .fi-page-header-heading {
     font-size: 1.65rem;
     font-weight: 700;
-    color: var(--hero-navy);
+    color: var(--hero-text);
     letter-spacing: -0.02em;
 }
 
@@ -260,7 +300,7 @@
     padding: 1.1rem 1rem;
     border-radius: var(--hero-radius);
     border: 1px solid var(--hero-border);
-    background: #fff;
+    background: var(--hero-card);
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     min-height: 118px;
 }
@@ -302,7 +342,7 @@
 .hero-quick-label {
     font-size: 0.875rem;
     font-weight: 700;
-    color: var(--hero-navy);
+    color: var(--hero-text);
     line-height: 1.25;
 }
 
@@ -313,7 +353,7 @@
 .hero-quick-desc {
     margin-top: 0.3rem;
     font-size: 0.75rem;
-    color: #64748b;
+    color: var(--hero-text-muted);
     line-height: 1.4;
 }
 
@@ -341,7 +381,7 @@
 .fi-wi-stats-overview-stat {
     border-radius: var(--hero-radius) !important;
     border: 1px solid var(--hero-border) !important;
-    background: #fff !important;
+    background: var(--hero-stat-bg) !important;
     box-shadow: none !important;
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
@@ -355,12 +395,12 @@
 .fi-wi-stats-overview-stat-value {
     font-size: 1.75rem !important;
     font-weight: 700 !important;
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
 }
 
 .fi-wi-stats-overview-stat-label {
     font-weight: 600 !important;
-    color: #475569 !important;
+    color: var(--hero-text-muted) !important;
 }
 
 /* Chart widgets — height */
@@ -397,7 +437,7 @@
 }
 
 .hero-recon-stat {
-    background: #fff;
+    background: var(--hero-card);
     border: 1px solid var(--hero-border);
     border-radius: var(--hero-radius);
     padding: 1.25rem;
@@ -413,7 +453,7 @@
     display: block;
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--hero-navy);
+    color: var(--hero-text);
     line-height: 1.1;
 }
 
@@ -426,7 +466,7 @@
     margin-top: 0.35rem;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #64748b;
+    color: var(--hero-text-muted);
 }
 
 .hero-recon-grid {
@@ -443,7 +483,7 @@
 
 .hero-recon-grid .fi-section-header-heading {
     font-weight: 700 !important;
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
 }
 
 .hero-recon-table-wrap {
@@ -461,7 +501,7 @@
     text-align: left;
     padding: 0.65rem 0.75rem;
     font-weight: 600;
-    color: #475569;
+    color: var(--hero-text-muted);
     background: var(--hero-surface);
     border-bottom: 1px solid var(--hero-border);
     white-space: nowrap;
@@ -469,8 +509,8 @@
 
 .hero-recon-table tbody td {
     padding: 0.75rem;
-    border-bottom: 1px solid #f1f5f9;
-    color: var(--hero-navy);
+    border-bottom: 1px solid var(--hero-row-border);
+    color: var(--hero-text);
     vertical-align: middle;
 }
 
@@ -485,11 +525,11 @@
 .hero-recon-empty {
     padding: 2rem 0.75rem !important;
     text-align: center;
-    color: #64748b !important;
+    color: var(--hero-text-muted) !important;
 }
 
 .hero-recon-muted {
-    color: #94a3b8;
+    color: var(--hero-text-subtle);
 }
 
 .hero-recon-link {
@@ -519,6 +559,13 @@
 .hero-recon-badge-primary { background: #dbeafe; color: #1e40af; }
 .hero-recon-badge-gray { background: #f1f5f9; color: #475569; }
 
+html.dark .hero-recon-badge-success { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+html.dark .hero-recon-badge-warning { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+html.dark .hero-recon-badge-danger { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+html.dark .hero-recon-badge-info { background: rgba(14, 165, 233, 0.2); color: #7dd3fc; }
+html.dark .hero-recon-badge-primary { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+html.dark .hero-recon-badge-gray { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+
 /* ══════════════════════════════════════════════════════════
    Portal-wide elegance — sections, pages, tables, forms
    ══════════════════════════════════════════════════════════ */
@@ -545,13 +592,13 @@
 .fi-panel-admin .fi-page-header-heading {
     font-size: 1.75rem !important;
     font-weight: 700 !important;
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
     letter-spacing: -0.025em !important;
     line-height: 1.2 !important;
 }
 
 .fi-panel-admin .fi-page-header-subheading {
-    color: #64748b !important;
+    color: var(--hero-text-muted) !important;
     font-size: 0.95rem !important;
     margin-top: 0.35rem !important;
     max-width: 640px;
@@ -561,7 +608,7 @@
 /* Section cards — unified HERO card style */
 .fi-panel-admin .fi-section:not(.fi-aside) {
     border-radius: var(--hero-radius) !important;
-    background: #fff !important;
+    background: var(--hero-card) !important;
     box-shadow: var(--hero-shadow) !important;
     border: 1px solid var(--hero-border) !important;
     ring: none !important;
@@ -579,7 +626,7 @@
     padding-right: 1.5rem !important;
     padding-top: 1.15rem !important;
     padding-bottom: 1rem !important;
-    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+    background: var(--hero-section-header-bg) !important;
     border-bottom: 1px solid var(--hero-border) !important;
 }
 
@@ -597,14 +644,14 @@
 .fi-panel-admin .fi-section-header-heading {
     font-size: 1.125rem !important;
     font-weight: 700 !important;
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
     letter-spacing: -0.015em !important;
     line-height: 1.3 !important;
 }
 
 .fi-panel-admin .fi-section-header-description {
     font-size: 0.875rem !important;
-    color: #64748b !important;
+    color: var(--hero-text-muted) !important;
     line-height: 1.5 !important;
     margin-top: 0.15rem !important;
 }
@@ -623,7 +670,7 @@
 
 /* Not-contained sections (legacy widgets) — still card-wrapped */
 .fi-panel-admin .fi-section.fi-section-not-contained {
-    background: #fff !important;
+    background: var(--hero-card) !important;
     border: 1px solid var(--hero-border) !important;
     border-radius: var(--hero-radius) !important;
     box-shadow: var(--hero-shadow) !important;
@@ -646,7 +693,7 @@
 .fi-panel-admin .fi-wi-stats-overview-stat {
     border-radius: 0.75rem !important;
     border: 1px solid var(--hero-border) !important;
-    background: linear-gradient(180deg, #fff 0%, #fafbfc 100%) !important;
+    background: var(--hero-stat-bg) !important;
     padding: 0.25rem !important;
     position: relative;
     overflow: hidden;
@@ -670,20 +717,20 @@
 .fi-panel-admin .fi-wi-stats-overview-stat-label {
     font-size: 0.8rem !important;
     font-weight: 600 !important;
-    color: #64748b !important;
+    color: var(--hero-text-muted) !important;
     text-transform: none !important;
 }
 
 .fi-panel-admin .fi-wi-stats-overview-stat-value {
     font-size: 1.85rem !important;
     font-weight: 700 !important;
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
     letter-spacing: -0.02em !important;
 }
 
 .fi-panel-admin .fi-wi-stats-overview-stat-description {
     font-size: 0.78rem !important;
-    color: #94a3b8 !important;
+    color: var(--hero-text-subtle) !important;
 }
 
 /* Resource tables */
@@ -692,12 +739,12 @@
     border: 1px solid var(--hero-border) !important;
     box-shadow: var(--hero-shadow) !important;
     overflow: hidden;
-    background: #fff !important;
+    background: var(--hero-card) !important;
 }
 
 .fi-panel-admin .fi-ta-header-cell {
     background: var(--hero-surface) !important;
-    color: #475569 !important;
+    color: var(--hero-text-muted) !important;
     font-weight: 600 !important;
     font-size: 0.8rem !important;
     text-transform: uppercase;
@@ -705,11 +752,11 @@
 }
 
 .fi-panel-admin .fi-ta-row:hover {
-    background: var(--hero-amber-soft) !important;
+    background: var(--hero-row-hover) !important;
 }
 
 .fi-panel-admin .fi-ta-row.fi-selected {
-    background: #fffbeb !important;
+    background: var(--hero-amber-soft) !important;
 }
 
 /* Forms on edit/create pages */
@@ -738,12 +785,12 @@
 
 /* Breadcrumbs */
 .fi-panel-admin .fi-breadcrumbs-item-label {
-    color: #64748b !important;
+    color: var(--hero-text-muted) !important;
     font-weight: 500 !important;
 }
 
 .fi-panel-admin .fi-breadcrumbs-item:last-child .fi-breadcrumbs-item-label {
-    color: var(--hero-navy) !important;
+    color: var(--hero-text) !important;
     font-weight: 600 !important;
 }
 
