@@ -18,10 +18,22 @@ class ExtendedModuleSeeder extends Seeder
 {
     public function run(): void
     {
-        AddOn::create(['name' => 'Carry-On Bag', 'code' => 'CARRYON', 'price' => 0, 'weight_kg' => 7, 'visibility' => LegVisibility::Public]);
-        AddOn::create(['name' => 'Checked Suitcase', 'code' => 'SUITCASE', 'price' => 35, 'weight_kg' => 23, 'visibility' => LegVisibility::Public]);
-        AddOn::create(['name' => 'Oversize Baggage', 'code' => 'OVERSIZE', 'price' => 75, 'weight_kg' => 32, 'visibility' => LegVisibility::Public]);
-        AddOn::create(['name' => 'VIP Handling', 'code' => 'VIP', 'price' => 150, 'weight_kg' => 0, 'visibility' => LegVisibility::Internal]);
+        AddOn::query()->firstOrCreate(
+            ['code' => 'CARRYON'],
+            ['name' => 'Carry-On Bag', 'price' => 0, 'weight_kg' => 7, 'visibility' => LegVisibility::Public],
+        );
+        AddOn::query()->firstOrCreate(
+            ['code' => 'SUITCASE'],
+            ['name' => 'Checked Suitcase', 'price' => 35, 'weight_kg' => 23, 'visibility' => LegVisibility::Public],
+        );
+        AddOn::query()->firstOrCreate(
+            ['code' => 'OVERSIZE'],
+            ['name' => 'Oversize Baggage', 'price' => 75, 'weight_kg' => 32, 'visibility' => LegVisibility::Public],
+        );
+        AddOn::query()->firstOrCreate(
+            ['code' => 'VIP'],
+            ['name' => 'VIP Handling', 'price' => 150, 'weight_kg' => 0, 'visibility' => LegVisibility::Internal],
+        );
 
         $agency = Agency::first();
         if ($agency) {
@@ -74,5 +86,7 @@ class ExtendedModuleSeeder extends Seeder
             ['name' => 'John Smith', 'password' => Hash::make('password')],
         );
         $customerUser->update(['passenger_id' => $passenger->id]);
+
+        $this->call(ReconciliationSampleSeeder::class);
     }
 }

@@ -17,6 +17,8 @@ class LegTimeLogForm
             ->components([
                 Select::make('flight_leg_id')
                     ->relationship('flightLeg', 'id')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->routeLabel().' — '.$record->departure_at->format('M j, Y g:i A'))
+                    ->searchable()
                     ->required(),
                 DateTimePicker::make('engine_start_at'),
                 DateTimePicker::make('takeoff_at'),

@@ -12,6 +12,8 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
 use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\HtmlString;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -29,8 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(false)
             ->brandName('HERO Reservation System')
-            ->brandLogo(asset(config('hero.branding.logo')))
-            ->brandLogoHeight('2.25rem')
+            ->brandLogo(fn (): Htmlable => new HtmlString(view('filament.branding.brand')->render()))
+            ->brandLogoHeight('2.5rem')
             ->maxContentWidth(Width::Full)
             ->colors([
                 'primary' => Color::Amber,
