@@ -57,10 +57,6 @@ class OpsOverviewStatsWidget extends StatsOverviewWidget
         $bookingsToday = Booking::query()->whereDate('created_at', today())->count();
         $revenueToday = (float) Booking::query()->whereDate('created_at', today())->sum('total_amount');
 
-        $bookingTrend = collect(range(6, 0))
-            ->map(fn (int $daysAgo) => Booking::query()->whereDate('created_at', today()->subDays($daysAgo))->count())
-            ->all();
-
         [$overweight, $nearCapacity] = $this->loadAlerts();
 
         $openInvoices = Invoice::query()
@@ -75,7 +71,6 @@ class OpsOverviewStatsWidget extends StatsOverviewWidget
                 ->descriptionIcon(Heroicon::OutlinedPaperAirplane)
                 ->icon(Heroicon::OutlinedCalendarDays)
                 ->color('primary')
-                ->chart($bookingTrend)
                 ->url(FlightResource::getUrl('index')),
 
             Stat::make('Bookings Today', $bookingsToday)
@@ -83,7 +78,6 @@ class OpsOverviewStatsWidget extends StatsOverviewWidget
                 ->descriptionIcon(Heroicon::OutlinedBanknotes)
                 ->icon(Heroicon::OutlinedTicket)
                 ->color('success')
-                ->chart($bookingTrend)
                 ->url(BookingResource::getUrl('index')),
 
             Stat::make('Open Invoices', $openInvoices)
